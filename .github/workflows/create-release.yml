@@ -5,7 +5,7 @@ on:
 
 jobs:
   create-release:
-    runs-on: windows-2022
+    runs-on: windows-11-arm
     steps:
     - uses: actions/checkout@v3.6.0
       with:
@@ -16,12 +16,12 @@ jobs:
     - name: Build Dependencies
       shell: cmd
       run: |
-        start /w .github\workflows\scripts\windows\build-dependencies.bat
+        start /w .github\workflows\scripts\windows\build-dependencies-arm64.bat
 
     - name: Create Dependencies Archive
       shell: cmd
       run: |
-        "C:\Program Files\7-Zip\7z.exe" a pcsx2-windows-dependencies.7z .\deps
+        7z a pcsx2-windows-dependencies.7z .\deps
 
     - name: Create Release
       uses: "marvinpinto/action-automatic-releases@latest"
